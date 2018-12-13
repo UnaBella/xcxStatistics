@@ -1,17 +1,35 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/onLine/index",
     "pages/test/test",
     "pages/logs/logs"
-    
-    
-
     
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarBackgroundColor": "#2196f3",
+    "navigationBarTitleText": "数据统计",
+    "navigationBarTextStyle":"white"
+  },
+  "tabBar": {
+    "position":"top",
+    "color": "#999",
+    "selectedColor": "#2196f3",
+    "backgroundColor": "#f4faff",
+    "list": [
+      {
+        "selectedIconPath": "static/img/se_off.png",
+        "iconPath": "static/img/off.png",
+        "pagePath": "pages/index/index",
+        "text": "线下店"
+      },
+      {
+        "selectedIconPath": "static/img/se_on.png",
+        "iconPath": "static/img/on.png",
+        "pagePath": "pages/onLine/index",
+        "text": "线上店"
+      }
+    ]
   }
 }

@@ -1,54 +1,76 @@
-//index.js
-//获取应用实例
-const app = getApp()
+// index.js
+import F2 from '@antv/wx-f2'; // 注：也可以不引入， initChart 方法已经将 F2 传入，如果需要引入，注意需要安装 @antv/wx-f2 依赖
+
+let chart = null;
+
+
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
+    shops:['沈阳店','上海店'],
+    index: 0,
+    partSales:{
+      dailyAverage:'200',
+      dayDoc:{
+        upOrDown:0,
+        rate:'20%',
+        actualAmount:'1000.00',
+        supplyAmount:'750',
+        orderNum:'300',
+      },
+      monthDoc: {
+        upOrDown: 0,
+        rate: '20%',
+        actualAmount: '1000.00',
+        supplyAmount: '750',
+        orderNum: '300',
+        months: [
+           '2018.10', '2018.11', '2018.12'
+        ],
+        index:0
       }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
+    },
+    salesData: {
+      onInit:(canvas, width, height, F2)=> { // 使用 F2 绘制图表
+        const data = getApp().globalData.data
+        chart = new F2.Chart({
+          el: canvas,
+          width,
+          height
+        });
+        chart.source(data, {
+          sales: {
+            tickCount: 5
+          }
+        });
+        chart.tooltip({
+          showItemMarker: false,
+          onShow(ev) {
+            const { items } = ev;
+            items[0].name = null;
+            items[0].name = items[0].title;
+            items[0].value = '¥ ' + items[0].value;
+          }
+        });
+        chart.interval().position('year*sales');
+        chart.render();
+        return chart;
+      }
     }
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+  bindShopPickerChange(e) {
+    console.log('picker发送选择改变，Shop携带值为', e.detail.value)
     this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      index: e.detail.value
     })
+  },
+  bindMonthsPickerChange(e) {
+    console.log('picker发送选择改变，Months携带值为', e.detail.value)
+    this.setData({
+      'partSales.monthDoc.index': e.detail.value
+    })
+  },
+  onReady() {
   }
-})
+});
+

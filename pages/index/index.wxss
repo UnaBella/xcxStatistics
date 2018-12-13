@@ -1,3 +1,85 @@
-.inputaa{
-  background: #ccc;
+/**app.wxss**/
+page{
+  height: 100%;
+  font-size: 32rpx;
+}
+.instructions{
+  color: #ff0000;
+  /* height: 35%; */
+  /* border: 1px dashed  #999 */
+}
+.instructions-ico{
+  float: left;
+  padding: 6rpx;
+}
+.instructions-ins{
+  font-size: 28rpx;
+}
+.select{
+  width: 80%;
+  border-bottom: 1px dashed  #EDEDED;
+}
+.picker{
+  display: inline-block;
+  margin-right: 20rpx;
+  /* width: 95%; */
+}
+.pickerAfter{
+  display: inline-block;
+}
+.pickerAfter:after{
+     content: "";
+     display: inline-block;
+     height: 6px;
+     width: 6px;
+     border-width: 0px 2px 2px 0;
+     border-color: #ccc;
+     border-style: solid;
+     transform: matrix(0.71,0.71,-0.71,0.71,0,-3);
+}
+.card-title{
+  align-self: left;
+  padding: 20rpx 30rpx 0;
+  color: #2196f3;
+}
+.card{
+   color: #999;
+  font-size: 28rpx;
+  margin: 16rpx;
+  width: 94%;
+  /* height: 30%; */
+  /* border: 1px solid red; */
+  background: #f4faff;
+  border-radius: 20rpx; 
+  box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.20);
+}
+
+.card-base{
+  padding: 20rpx;
+}
+.dailyAverage{
+  font-size: 42rpx;
+  color: #333;
+}
+.red{
+  color: red;
+}
+.green{
+  color: green;
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
+}
+.changeMonth{
+  border-bottom: 1px dashed  #ccc;
+}
+#table-sales{
+  margin: 16rpx;
+  width: 94%;
+  height: 30%;
+  /* border: 1px solid red; */
+  background: #f4faff;
+  border-radius: 20rpx; 
+  box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.20);
 }

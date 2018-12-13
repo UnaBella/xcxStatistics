@@ -1,2 +1,61 @@
 <!--index.wxml-->
-index
+<view class='container'>
+  <view class='instructions'>
+    <view class='animated bounce instructions-ico'><van-icon name="info-o" /></view>
+    <text class='instructions-ins'>下方可选条件除“销售占比”外的指标都适用</text>
+  </view>
+  <view class='select'>
+    <picker bindchange="bindShopPickerChange" value="{{index}}" range="{{shops}}">
+      <view class="picker"> 当前店铺数据：{{shops[index]}} </view>
+      <view class="pickerAfter"></view>
+    </picker>
+  </view>
+  <!-- <view class='card-title'>销售额：</view> -->
+  <view class='card'>
+    <view class='card-base'>
+      日平均客单价： 
+      <view class='center'>
+        <text class='dailyAverage'>{{partSales.dailyAverage}}</text> 元
+      </view>
+    </view>
+  </view>
+  <view class='card'>
+    <view class='card-base'>
+      <view class='flex'>
+        <view>昨日销售额：</view>
+        <view>周同比： <text  class="{{partSales.dayDoc.upOrDown==0?'red':'green'}}">{{partSales.dayDoc.upOrDown==0?'▼':'▲'}}{{partSales.dayDoc.rate}}</text>
+        </view>
+      </view> 
+      
+      <view class='center'>
+        <text class='dailyAverage'> {{partSales.dayDoc.actualAmount}}</text> 元
+      </view>
+     
+      <view>应收账款：{{partSales.dayDoc.supplyAmount}} 元</view>
+      <view>订单数：{{partSales.dayDoc.orderNum}} 笔</view>
+    </view>
+  </view>
+  <view class='card'>
+    <view class='card-base'>
+      <view class='flex'>
+        <view class='changeMonth'>
+          <picker bindchange="bindMonthsPickerChange" value="{{partSales.monthDoc.index}}" range="{{partSales.monthDoc.months}}">
+            <view class="picker"> 日期：{{partSales.monthDoc.months[partSales.monthDoc.index]}} </view>
+            <view class="pickerAfter"></view>
+          </picker>
+        </view>
+        <view>周同比： <text  class="{{partSales.monthDoc.upOrDown==0?'red':'green'}}">{{partSales.monthDoc.upOrDown==0?'▼':'▲'}}{{partSales.monthDoc.rate}}</text>
+        </view>
+      </view> 
+      
+      <view class='center'>
+        <text class='dailyAverage'> {{partSales.monthDoc.actualAmount}}</text> 元
+      </view>
+     
+      <view>应收账款：{{partSales.monthDoc.supplyAmount}} 元</view>
+      <view>订单数：{{partSales.monthDoc.orderNum}} 笔</view>
+    </view>
+  </view>
+  <view class='card-title'>销售额：</view>
+  <ff-canvas id="table-sales" canvas-id="column" opts="{{ salesData }}"></ff-canvas>
+</view>
