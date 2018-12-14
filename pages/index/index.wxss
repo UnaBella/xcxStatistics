@@ -4,6 +4,7 @@ page{
   font-size: 32rpx;
 }
 .instructions{
+  padding:30rpx;
   color: #ff0000;
   /* height: 35%; */
   /* border: 1px dashed  #999 */
@@ -18,6 +19,7 @@ page{
 .select{
   width: 80%;
   border-bottom: 1px dashed  #EDEDED;
+  margin:auto;
 }
 .picker{
   display: inline-block;
@@ -74,10 +76,52 @@ page{
 .changeMonth{
   border-bottom: 1px dashed  #ccc;
 }
+.posA{
+  position: absolute;
+  bottom: 0;
+}
+.more {
+  
+   width: 690rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #2196f3;
+  border-radius: 20rpx; 
+  box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.20);
+  /* border-radius: 50rpx; */
+  font-size: 30rpx;
+  color: #FFFFFF;
+  margin: 16rpx auto;
+}
+button[class="more"]::after {
+  border:0;
+  border-radius: 50rpx;
+  /* background: #dedede; */
+}
+.button-hover{
+  opacity: 0.8
+}
+#none{
+  display: none;
+}
+.hid{
+  visibility:hidden
+}
+.ov{
+  overflow: hidden;
+}
+#table-proportion,
+#table-salesTrend,
+#table-orderTrend,
+#table-bestSeller,
+#table-lowSales,
+#table-marketing,
+#table-stock,
+#table-accountsReceivable,
 #table-sales{
   margin: 16rpx;
   width: 94%;
-  height: 30%;
+  height: 40%;
   /* border: 1px solid red; */
   background: #f4faff;
   border-radius: 20rpx; 
