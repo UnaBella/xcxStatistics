@@ -1,12 +1,139 @@
 /**app.wxss**/
 page{
   height: 100%;
+  font-size: 32rpx;
 }
-.part1{
-  height: 35%;
-  border: 1px soli  red
+.instructions{
+  padding:30rpx;
+  color: #ff0000;
+  /* height: 35%; */
+  /* border: 1px dashed  #999 */
 }
-ff-canvas {
-  width: 100%;
-  height: 30%;
+.instructions-ico{
+  float: left;
+  padding: 6rpx;
+}
+.instructions-ins{
+  font-size: 28rpx;
+}
+.select{
+  width: 80%;
+  border-bottom: 1px dashed  #EDEDED;
+  margin:auto;
+}
+.picker{
+  display: inline-block;
+  margin-right: 20rpx;
+  /* width: 95%; */
+}
+.pickerAfter{
+  display: inline-block;
+}
+.pickerAfter:after{
+     content: "";
+     display: inline-block;
+     height: 6px;
+     width: 6px;
+     border-width: 0px 2px 2px 0;
+     border-color: #ccc;
+     border-style: solid;
+     transform: matrix(0.71,0.71,-0.71,0.71,0,-3);
+}
+.card-title{
+  align-self: left;
+  padding: 20rpx 30rpx 0;
+  color: #2196f3;
+}
+.card{
+   color: #999;
+  font-size: 28rpx;
+  margin: 16rpx;
+  width: 94%;
+  /* height: 30%; */
+  /* border: 1px solid red; */
+  background: #f4faff;
+  border-radius: 20rpx; 
+  box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.20);
+}
+
+.card-base{
+  padding: 20rpx;
+}
+.dailyAverage{
+  font-size: 42rpx;
+  color: #333;
+}
+.red{
+  color: red;
+}
+.green{
+  color: green;
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
+}
+.changeMonth{
+  border-bottom: 1px dashed  #ccc;
+}
+.posA{
+  position: absolute;
+  bottom: 0;
+}
+.more {
+  
+   width: 690rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #2196f3;
+  border-radius: 20rpx; 
+  box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.20);
+  /* border-radius: 50rpx; */
+  font-size: 30rpx;
+  color: #FFFFFF;
+  margin: 16rpx auto;
+}
+button[class="more"]::after {
+  border:0;
+  border-radius: 50rpx;
+  /* background: #dedede; */
+}
+.button-hover{
+  opacity: 0.8
+}
+#none{
+  display: none;
+}
+.hid{
+  visibility:hidden
+}
+.ov{
+  overflow: hidden;
+}
+.bottomLine{
+  font-size: 24rpx;
+  color:#999;
+  padding: 0 20rpx 0;
+    margin: 20rpx 0;
+    line-height: 1px;
+    border-left: 180rpx dashed #EDEDED;
+    border-right: 180rpx dashed #EDEDED;
+    text-align: center;
+}
+#table-proportion,
+#table-salesTrend,
+#table-orderTrend,
+#table-bestSeller,
+#table-lowSales,
+
+#table-trafficSource,
+#table-accountsReceivable,
+#table-sales{
+  margin: 16rpx;
+  width: 94%;
+  height: 40%;
+  /* border: 1px solid red; */
+  background: #f4faff;
+  border-radius: 20rpx; 
+  box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.20);
 }

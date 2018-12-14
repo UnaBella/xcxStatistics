@@ -3,7 +3,7 @@
 <view class="container">
   <view class='instructions'>
     <view class='animated bounce instructions-ico'><van-icon name="info-o" /></view>
-    <text class='instructions-ins'>下方可选条件除“销售占比”外的指标都适用</text>
+    <text class='instructions-ins'>下方店铺条件除“销售占比”外的指标都适用</text>
   </view>
   <view class='select'>
     <picker bindchange="bindShopPickerChange" value="{{index}}" range="{{shops}}">
@@ -82,4 +82,6 @@
   <ff-canvas id="table-stock" canvas-id="bar" opts="{{ stockTRateData }}"></ff-canvas>
   <view class="card-title ">应收账款周转率：</view>
   <ff-canvas id="table-accountsReceivable" canvas-id="bar" opts="{{ accountsReceivableTRateData }}"></ff-canvas>
+
+  <view class="bottomLine" >没错，我是底线╭(╯^╰)╮</view>
 </view>

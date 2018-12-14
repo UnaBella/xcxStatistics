@@ -1,8 +1,85 @@
 <!--index.wxml-->
-<view class='part1'>
+<!-- <view class="container {{moreStatus?'':'ov'}}"> -->
 <view class="container">
-  
-aaa
-  
-</view>
+  <view class='instructions'>
+    <view class='animated bounce instructions-ico'><van-icon name="info-o" /></view>
+    <text class='instructions-ins'>下方店铺条件除“销售占比”外的指标都适用</text>
+  </view>
+  <view class='select'>
+    <picker bindchange="bindShopPickerChange" value="{{index}}" range="{{shops}}">
+      <view class="picker"> 当前店铺数据：{{shops[index]}} </view>
+      <view class="pickerAfter"></view>
+    </picker>
+  </view>
+  <!-- <view class='card-title'>销售额：</view> -->
+  <view class='card'>
+    <view class='card-base'>
+      日平均客单价： 
+      <view class='center'>
+        <text class='dailyAverage'>{{partSales.dailyAverage}}</text> 元
+      </view>
+    </view>
+  </view>
+  <view class='card'>
+    <view class='card-base'>
+      <view class='flex'>
+        <view>昨日销售额：</view>
+        <view>周同比： <text  class="{{partSales.dayDoc.upOrDown==0?'red':'green'}}">{{partSales.dayDoc.upOrDown==0?'▼':'▲'}}{{partSales.dayDoc.rate}}</text>
+        </view>
+      </view> 
+      
+      <view class='center'>
+        <text class='dailyAverage'> {{partSales.dayDoc.actualAmount}}</text> 元
+      </view>
+     
+      <view>应收账款：{{partSales.dayDoc.supplyAmount}} 元</view>
+      <view>订单数：{{partSales.dayDoc.orderNum}} 笔</view>
+    </view>
+  </view>
+  <view class='card'>
+    <view class='card-base'>
+      <view class='flex'>
+        <view class='changeMonth'>
+          <picker bindchange="bindMonthsPickerChange" value="{{partSales.monthDoc.index}}" range="{{partSales.monthDoc.months}}">
+            <view class="picker"> 日期：{{partSales.monthDoc.months[partSales.monthDoc.index]}} </view>
+            <view class="pickerAfter"></view>
+          </picker>
+        </view>
+        <view>周同比： <text  class="{{partSales.monthDoc.upOrDown==0?'red':'green'}}">{{partSales.monthDoc.upOrDown==0?'▼':'▲'}}{{partSales.monthDoc.rate}}</text>
+        </view>
+      </view> 
+      
+      <view class='center'>
+        <text class='dailyAverage'> {{partSales.monthDoc.actualAmount}}</text> 元
+      </view>
+     
+      <view>应收账款：{{partSales.monthDoc.supplyAmount}} 元</view>
+      <view>订单数：{{partSales.monthDoc.orderNum}} 笔</view>
+    </view>
+  </view>
+  <!-- <view class="posA {{moreStatus?'none':''}}">
+    <button class='more' bindtap='checkMore'>查看更多</button>
+  </view> -->
+  <!-- <view class="card-title {{moreStatus?'':'none'}}">销售占比：</view>
+  <ff-canvas id="table-proportion"  class="{{moreStatus?'':'hid'}}"  canvas-id="guage" opts="{{ proportionData }}"></ff-canvas> -->
+  <!-- <view class='card-title'>销售额：</view>
+  <ff-canvas id="table-sales" class="{{moreStatus?'':'hid'}}" canvas-id="column" opts="{{ salesData }}"></ff-canvas> -->
+
+  <view class="card-title ">销售占比：</view>
+  <ff-canvas id="table-proportion"   canvas-id="guage" opts="{{ proportionData }}"></ff-canvas>
+  <view class="card-title ">过去7天销售趋势（元）：</view>
+  <ff-canvas id="table-salesTrend" canvas-id="scrollLine" opts="{{ salesTrendData }}"></ff-canvas>
+  <view class="card-title ">过去7天订单成交趋势（笔）：</view>
+  <ff-canvas id="table-orderTrend" canvas-id="scrollLine" opts="{{ orderTrendData }}"></ff-canvas>
+  <view class="card-title ">最畅销的十款商品：</view>
+  <ff-canvas id="table-bestSeller" canvas-id="bar" opts="{{ bestSellerGoodsData }}"></ff-canvas>
+  <view class="card-title ">低销量十款商品：</view>
+  <ff-canvas id="table-lowSales" canvas-id="bar" opts="{{ lowSalesGoodsData }}"></ff-canvas>
+
+
+  <view class="card-title ">应收账款周转率：</view>
+  <ff-canvas id="table-accountsReceivable" canvas-id="bar" opts="{{ accountsReceivableTRateData }}"></ff-canvas>
+  <view class="card-title ">流量来源：</view>
+  <ff-canvas id="table-trafficSource" canvas-id="bar" opts="{{ trafficSourceData }}"></ff-canvas>
+  <view class="bottomLine" >没错，我是底线╭(╯^╰)╮</view>
 </view>
