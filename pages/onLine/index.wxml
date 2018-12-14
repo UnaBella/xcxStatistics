@@ -81,5 +81,5 @@
   <ff-canvas id="table-accountsReceivable" canvas-id="bar" opts="{{ accountsReceivableTRateData }}"></ff-canvas>
   <view class="card-title ">流量来源：</view>
   <ff-canvas id="table-trafficSource" canvas-id="bar" opts="{{ trafficSourceData }}"></ff-canvas>
-  <view class="bottomLine" >没错，我是底线╭(╯^╰)╮</view>
+  <view class="bottomLine" >没错，我是底线 ;-)</view>
 </view>

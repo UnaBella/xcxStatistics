@@ -83,5 +83,5 @@
   <view class="card-title ">应收账款周转率：</view>
   <ff-canvas id="table-accountsReceivable" canvas-id="bar" opts="{{ accountsReceivableTRateData }}"></ff-canvas>
 
-  <view class="bottomLine" >没错，我是底线╭(╯^╰)╮</view>
+  <view class="bottomLine" >没错，我是底线 ;-)</view>
 </view>
