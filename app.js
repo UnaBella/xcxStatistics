@@ -35,15 +35,10 @@ App({
   },
   globalData: {
     userInfo: null,
-    data: [
-      { year: '1951 年', sales: 38, num: 10 },
-      { year: '1952 年', sales: 52, num: 4 },
-      { year: '1956 年', sales: 61, num: 16 },
-      { year: '1957 年', sales: 145, num: 13 },
-      { year: '1958 年', sales: 48, num: 10 },
-      { year: '1959 年', sales: 38, num: 1 },
-      { year: '1960 年', sales: 38, num: 7 },
-      { year: '1962 年', sales: 38, num: 10 },
+    proportionData: [
+      { name: '上海店', percent: 0.9, a: '1' },
+      { name: '沈阳店', percent: 0.01, a: '1' },
+      { name: '其他', percent: 0.09, a: '1' }
     ]
   }
 })

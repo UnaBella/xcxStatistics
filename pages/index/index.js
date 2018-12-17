@@ -3,7 +3,58 @@ import F2 from '@antv/wx-f2'; // 注：也可以不引入， initChart 方法已
 
 let chart = null;
 
+function testA(canvas, width, height, F2){ // 使用 F2 绘制图表
+  // const map = {
+  //   '上海店': '40%',
+  //   '沈阳店': '58%',
+  //   '其他': '2%',
+  // };
+  const data = getApp().globalData.proportionData
+  // let data = doc
+  chart = new F2.Chart({
+    el: canvas,
+    width,
+    height
+  });
+  chart.source(data, {
+    percent: {
+      formatter(val) {
+        return val * 100 + '%';
+      }
+    }
+  });
+  // chart.legend({
+  //   position: 'right',
+  //   itemFormatter(val) {
+  //     return val + '  ' + map[val];
+  //   }
+  // });
+  chart.tooltip(false);
+  chart.coord('polar', {
+    transposed: true,
+    radius: 0.85
+  });
+  chart.axis(false);
+  chart.interval()
+    .position('a*percent')
+    .color('name', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864', '#8543E0'])
+    .adjust('stack')
+    .style({
+      lineWidth: 1,
+      stroke: '#fff',
+      lineJoin: 'round',
+      lineCap: 'round'
+    })
+    .animate({
+      appear: {
+        duration: 1200,
+        easing: 'bounceOut'
+      }
+    });
 
+  chart.render();
+  return chart;
+}
 
 Page({
   data: {
@@ -33,61 +84,7 @@ Page({
     },
     // 销售占比
     proportionData:{
-      onInit:(canvas, width, height, F2)=> { // 使用 F2 绘制图表
-        const map = {
-          '上海店': '40%',
-          '沈阳店': '58%',
-          '其他': '2%',
-        };
-        const data = [
-          { name: '上海店', percent: 0.4, a: '1' },
-          { name: '沈阳店', percent: 0.58, a: '1' },
-          { name: '其他', percent: 0.02, a: '1' }
-        ];
-        chart = new F2.Chart({
-          el: canvas,
-          width,
-          height
-        });
-        chart.source(data, {
-          percent: {
-            formatter(val) {
-              return val * 100 + '%';
-            }
-          }
-        });
-        chart.legend({
-          position: 'right',
-          itemFormatter(val) {
-            return val + '  ' + map[val];
-          }
-        });
-        chart.tooltip(false);
-        chart.coord('polar', {
-          transposed: true,
-          radius: 0.85
-        });
-        chart.axis(false);
-        chart.interval()
-          .position('a*percent')
-          .color('name', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864', '#8543E0'])
-          .adjust('stack')
-          .style({
-            lineWidth: 1,
-            stroke: '#fff',
-            lineJoin: 'round',
-            lineCap: 'round'
-          })
-          .animate({
-            appear: {
-              duration: 1200,
-              easing: 'bounceOut'
-            }
-          });
-
-        chart.render();
-        return chart;
-      }
+      onInit:testA
     },
     // 过去7天销售趋势
     salesTrendData:{
@@ -617,6 +614,63 @@ Page({
     this.setData({
       index: e.detail.value
     })
+   
+    let t = this.selectComponent('#table-proportion');
+
+
+    console.log(t)
+    t.init((canvas, width, height) => {
+      const data = [
+        { name: '上海店', percent: 0.1, a: '1' },
+        { name: '沈阳店', percent: 0.31, a: '1' },
+        { name: '其他', percent: 0.59, a: '1' }
+      ]
+      // let data = doc
+      chart = new F2.Chart({
+        el: canvas,
+        width,
+        height
+      });
+      chart.source(data, {
+        percent: {
+          formatter(val) {
+            return val * 100 + '%';
+          }
+        }
+      });
+      // chart.legend({
+      //   position: 'right',
+      //   itemFormatter(val) {
+      //     return val + '  ' + map[val];
+      //   }
+      // });
+      chart.tooltip(false);
+      chart.coord('polar', {
+        transposed: true,
+        radius: 0.85
+      });
+      chart.axis(false);
+      chart.interval()
+        .position('a*percent')
+        .color('name', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864', '#8543E0'])
+        .adjust('stack')
+        .style({
+          lineWidth: 1,
+          stroke: '#fff',
+          lineJoin: 'round',
+          lineCap: 'round'
+        })
+        .animate({
+          appear: {
+            duration: 1200,
+            easing: 'bounceOut'
+          }
+        });
+
+      chart.render();
+      return chart;
+    })
+
   },
   bindMonthsPickerChange(e) {
     console.log('picker发送选择改变，Months携带值为', e.detail.value)
