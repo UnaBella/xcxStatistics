@@ -1,7 +1,9 @@
 {
   "pages":[
+    "pages/start/index",
     "pages/index/index",
     "pages/onLine/index",
+
     "pages/test/test",
     "pages/logs/logs"
     

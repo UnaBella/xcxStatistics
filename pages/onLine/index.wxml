@@ -6,8 +6,8 @@
     <text class='instructions-ins'>下方店铺条件除“销售占比”外的指标都适用</text>
   </view>
   <view class='select'>
-    <picker bindchange="bindShopPickerChange" value="{{index}}" range="{{shops}}">
-      <view class="picker"> 当前店铺数据：{{shops[index]}} </view>
+    <picker bindchange="bindShopPickerChange" value="{{index}}" range="{{shopNames}}">
+      <view class="picker"> 当前店铺数据：{{shopNames[index]}} </view>
       <view class="pickerAfter"></view>
     </picker>
   </view>
@@ -24,7 +24,7 @@
     <view class='card-base'>
       <view class='flex'>
         <view>昨日销售额：</view>
-        <view>周同比： <text  class="{{partSales.dayDoc.upOrDown==0?'red':'green'}}">{{partSales.dayDoc.upOrDown==0?'▼':'▲'}}{{partSales.dayDoc.rate}}</text>
+        <view>周同比： <text  class="{{partSales.dayDoc.upOrDown==0?'red':'green'}}">{{partSales.dayDoc.upOrDown==0?'▼':'▲'}}{{partSales.dayDoc.rate}}%</text>
         </view>
       </view> 
       
@@ -40,12 +40,12 @@
     <view class='card-base'>
       <view class='flex'>
         <view class='changeMonth'>
-          <picker bindchange="bindMonthsPickerChange" value="{{partSales.monthDoc.index}}" range="{{partSales.monthDoc.months}}">
-            <view class="picker"> 日期：{{partSales.monthDoc.months[partSales.monthDoc.index]}} </view>
+          <picker bindchange="bindMonthsPickerChange" value="{{partSales.index}}" range="{{partSales.months}}">
+            <view class="picker"> 日期：{{partSales.months[partSales.index]}} </view>
             <view class="pickerAfter"></view>
           </picker>
         </view>
-        <view>周同比： <text  class="{{partSales.monthDoc.upOrDown==0?'red':'green'}}">{{partSales.monthDoc.upOrDown==0?'▼':'▲'}}{{partSales.monthDoc.rate}}</text>
+        <view>周同比： <text  class="{{partSales.monthDoc.upOrDown==0?'red':'green'}}">{{partSales.monthDoc.upOrDown==0?'▼':'▲'}}{{partSales.monthDoc.rate}}%</text>
         </view>
       </view> 
       
