@@ -98,8 +98,54 @@ App({
       })
   },
   globalData: {
-    offLine:{},
-    onLine:{},
+    offLine:{
+      proportion:{
+        proportionLegend:[],
+        proportionValues:[],
+      },
+      salesTrendData:{
+        list:[]
+      },
+      orderTrendData:{
+        list:[]
+      },
+      bestSellerGoodsData:{
+        list:[]
+      },
+      lowSellerGoodsData:{
+        list:[]
+      },
+      marketingRateData:{
+        list:[]
+      },
+      stockTRateData:{
+        list:[]
+      },
+      accountsReceivableTRateData:{
+        list:[]
+      }
+    },
+    onLine:{
+      proportion:{
+        proportionLegend:[],
+        proportionValues:[]
+      },
+      salesTrendData: {
+        list: []
+      },
+      orderTrendData: {
+        list: []
+      },
+      bestSellerGoodsData: {
+        list: []
+      },
+      lowSellerGoodsData: {
+        list: []
+      },
+      accountsReceivableTRateData: {
+        list: []
+      }
+    },
   },
 
 
