@@ -45,7 +45,7 @@
             <view class="pickerAfter"></view>
           </picker>
         </view>
-        <view>周同比： <text  class="{{partSales.monthDoc.upOrDown==0?'red':'green'}}">{{partSales.monthDoc.upOrDown==0?'▼':'▲'}}{{partSales.monthDoc.rate}}%</text>
+        <view>环比： <text  class="{{partSales.monthDoc.upOrDown==0?'red':'green'}}">{{partSales.monthDoc.upOrDown==0?'▼':'▲'}}{{partSales.monthDoc.rate}}%</text>
         </view>
       </view> 
       

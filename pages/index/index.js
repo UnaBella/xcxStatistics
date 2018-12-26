@@ -155,15 +155,18 @@ Page({
 });
 // 销售占比
 function proportionData(canvas, width, height, F2) { // 使用 F2 绘制图表
-  // const mapDoc = getApp().globalData.offLine.proportion.proportionLegend
-  // const a = mapDoc.map()
+  const mapDoc = getApp().globalData.offLine.proportion.proportionLegend
+  // console.log(mapDoc)
+  const map ={}
+  mapDoc.map(i=>{
+    map[i.shopName]= i.percentDisplay
+  })
+  // console.log(map)
   // const map = {
   //   '上海店': '40%',
   //   '沈阳店': '58%',
   //   '其他': '2%',
   // };
-  // console.log('xiaoshou', getApp().globalData.offLine)
-  // const data = getApp().globalData.proportionData
   const data = getApp().globalData.offLine.proportion.proportionValues
   // let data = doc
   chart = new F2.Chart({
@@ -178,12 +181,12 @@ function proportionData(canvas, width, height, F2) { // 使用 F2 绘制图表
       }
     }
   });
-  // chart.legend({
-  //   position: 'right',
-  //   itemFormatter(val) {
-  //     return val + '  ' + map[val];
-  //   }
-  // });
+  chart.legend({
+    position: 'right',
+    itemFormatter(val) {
+      return val + '  ' + map[val];
+    }
+  });
   chart.tooltip(false);
   chart.coord('polar', {
     transposed: true,
@@ -201,10 +204,10 @@ function proportionData(canvas, width, height, F2) { // 使用 F2 绘制图表
       lineCap: 'round'
     })
     .animate({
-      appear: {
-        duration: 1200,
-        easing: 'bounceOut'
-      }
+      // appear: {
+      //   duration: 1200,
+      //   easing: 'bounceOut'
+      // }
     });
 
   chart.render();
@@ -344,6 +347,7 @@ function reSalesTrendData() {
     });
    
     const data = app.globalData.offLine.salesTrendData.list
+    // console.log(data)
     chart.source(data, {
       day: {
         min: 0.9,
@@ -414,7 +418,10 @@ function orderTrendData(canvas, width, height, F2) {
     { count: 67, day: 6, title: '第六天' },
     { count: 21, day: 7, title: '第七天' },
   ];
+ 
   const data = app.globalData.offLine.orderTrendData.list
+  
+  // console.log(data)
   chart.source(data, {
     day: {
       min: 0.9,
@@ -848,7 +855,7 @@ function marketingRateData(canvas, width, height, F2) {
   chart.source(data, {
     rate: {
       formatter(val) {
-        return val * 100 + '%';
+        return val  + '%';
       }
     }
   });
@@ -919,7 +926,7 @@ function reMarketingData() {
     chart.source(data, {
       rate: {
         formatter(val) {
-          return val * 100 + '%';
+          return val  + '%';
         }
       }
     });
@@ -1000,7 +1007,7 @@ function stockTRateData(canvas, width, height, F2) {
     },
     rate: {
       formatter(val) {
-        return val * 1000 / 10 + '%';
+        return val  + '%';
       }
     }
   });
@@ -1080,7 +1087,7 @@ function reStockData() {
       },
       rate: {
         formatter(val) {
-          return val * 1000 / 10 + '%';
+          return val  + '%';
         }
       }
     });
@@ -1162,7 +1169,7 @@ function accountsReceivableTRateData(canvas, width, height, F2) {
     rate: {
       formatter(val) {
         // return val * 100 + '%';
-        return val*1000/10 + '%' ;
+        return val + '%' ;
 
       }
     }
@@ -1244,7 +1251,7 @@ function reAccountsReceivableData() {
       rate: {
         formatter(val) {
           // return val * 100 + '%';
-          return val * 1000 / 10 + '%';
+          return val  + '%';
 
         }
       }

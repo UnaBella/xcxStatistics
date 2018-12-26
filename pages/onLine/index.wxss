@@ -58,6 +58,7 @@ page{
 
 .card-base{
   padding: 20rpx;
+  height: 190rpx;
 }
 .dailyAverage{
   font-size: 42rpx;

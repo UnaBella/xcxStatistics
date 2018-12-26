@@ -82,14 +82,12 @@ Page({
       'partSales.dayDoc': partSalesData.partSalesDay,
       'partSales.months': partSalesData.monthGroups.list.map(i => { return i.month }),
       'partSales.monthDoc': partSalesData.monthGroups.list[this.data.partSales.index]
-    }, () => {
-      console.log('p', partSalesData)
     })
   },
  
 
   bindShopPickerChange(e) {
-    console.log('picker发送选择改变，Shop携带值为', e.detail.value)
+    // console.log('picker发送选择改变，Shop携带值为', e.detail.value)
 
     this.setData({
       index: e.detail.value
@@ -148,11 +146,18 @@ Page({
 
 // 销售占比
 function proportionData(canvas, width, height, F2) { // 使用 F2 绘制图表
+  const mapDoc = getApp().globalData.onLine.proportion.proportionLegend
   // const map = {
   //   '上海店': '40%',
   //   '沈阳店': '58%',
   //   '其他': '2%',
   // };
+  // console.log(mapDoc)
+  const map = {}
+  mapDoc.map(i => {
+    map[i.shopName] = i.percentDisplay
+  })
+  // console.log(map)
   const data = getApp().globalData.onLine.proportion.proportionValues
   const data1 = [
     { shopName: '上海店', percent: 0.4, constValue: '1' },
@@ -171,12 +176,12 @@ function proportionData(canvas, width, height, F2) { // 使用 F2 绘制图表
       }
     }
   });
-  // chart.legend({
-  //   position: 'right',
-  //   itemFormatter(val) {
-  //     return val + '  ' + map[val];
-  //   }
-  // });
+  chart.legend({
+    position: 'right',
+    itemFormatter(val) {
+      return val + '  ' + map[val];
+    }
+  });
   chart.tooltip(false);
   chart.coord('polar', {
     transposed: true,
@@ -194,10 +199,10 @@ function proportionData(canvas, width, height, F2) { // 使用 F2 绘制图表
       lineCap: 'round'
     })
     .animate({
-      appear: {
-        duration: 1200,
-        easing: 'bounceOut'
-      }
+      // appear: {
+      //   duration: 1200,
+      //   easing: 'bounceOut'
+      // }
     });
 
   chart.render();
@@ -205,11 +210,16 @@ function proportionData(canvas, width, height, F2) { // 使用 F2 绘制图表
 }
 function reProportionData(){
   (canvas, width, height) => {
+    const mapDoc = getApp().globalData.onLine.proportion.proportionLegend
     // const map = {
     //   '上海店': '40%',
     //   '沈阳店': '58%',
     //   '其他': '2%',
     // };
+    const map = {}
+    mapDoc.map(i => {
+      map[i.shopName] = i.percentDisplay
+    })
     // console.log('om', getApp().globalData.onLine)
     const data = getApp().globalData.onLine.proportion.proportionValues
     const data1 = [
@@ -229,12 +239,12 @@ function reProportionData(){
         }
       }
     });
-    // chart.legend({
-    //   position: 'right',
-    //   itemFormatter(val) {
-    //     return val + '  ' + map[val];
-    //   }
-    // });
+    chart.legend({
+      position: 'right',
+      itemFormatter(val) {
+        return val + '  ' + map[val];
+      }
+    });
     chart.tooltip(false);
     chart.coord('polar', {
       transposed: true,
@@ -867,7 +877,7 @@ function accountsReceivableTRateData(canvas, width, height, F2) {
     rate: {
       formatter(val) {
         // return val * 100 + '%';
-        return val * 1000 / 10 + '%';
+        return val  + '%';
 
       }
     }
@@ -941,7 +951,6 @@ function reAccountsReceivableData() {
       { rate: 0.26, title: 12 },
     ];
     const data = app.globalData.onLine.accountsReceivableTRateData.list
-    console.log('aaaa', data)
     chart.source(data, {
       title: {
         min: 0.9,
@@ -950,7 +959,7 @@ function reAccountsReceivableData() {
       rate: {
         formatter(val) {
           // return val * 100 + '%';
-          return val * 1000 / 10 + '%';
+          return val  + '%';
 
         }
       }
