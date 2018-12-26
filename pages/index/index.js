@@ -10,33 +10,28 @@ Page({
     moreStatus:false,
     index: 0,
     shops:[
-      {shopId:'wwccaigou',shopName:'沈阳万象城'},
-      { shopId: 'jwgxd', shopName: '集万' }
+      {shopId:'',shopName:'全部店铺'},
       ],
     shopIds:[],
     shopNames:[],
 
-    
     partSales:{
-      dailyAverage:'200',
+      dailyAverage:'0',
       dayDoc:{
         upOrDown:0,
-        rate:'20%',
-        actualAmount:'1000.00',
-        supplyAmount:'750',
-        orderNum:'300',
+        rate:'0',
+        actualAmount:'0',
+        supplyAmount:'0',
+        orderNum:'0',
       },
       index: 0,
-      months: [
-        '2018.10', '2018.11', '2018.12'
-      ],
+      months: ['2018'],
       monthDoc: {
         upOrDown: 0,
-        rate: '20%',
-        actualAmount: '1000.00',
-        supplyAmount: '750',
-        orderNum: '300'
-        
+        rate: '0',
+        actualAmount: '0',
+        supplyAmount: '0',
+        orderNum: '0'
       }
     },
     // 销售占比
@@ -78,10 +73,11 @@ Page({
 
 
   onLoad:function(){
-    // app.globalData.offLine
-    this.init()
+    app.getOffLineData('', this);
+    // this.init()
   },
   onShow:function(){
+    // this.init()
     // app.getOffLineData(this.data.shopIds[this.data.index]);
   },
   init:function(){
@@ -95,12 +91,10 @@ Page({
       'partSales.dayDoc': partSalesData.partSalesDay,
       'partSales.months': partSalesData.monthGroups.list.map(i => { return i.month }),
       'partSales.monthDoc': partSalesData.monthGroups.list[this.data.partSales.index]
-    },()=>{
-      console.log('p',partSalesData)
     })
   },
   bindShopPickerChange(e) {
-    console.log('picker发送选择改变，Shop携带值为', e.detail.value)
+    // console.log('picker发送选择改变，Shop携带值为', e.detail.value)
     this.setData({
       index: e.detail.value
     })
@@ -119,11 +113,11 @@ Page({
     this.init();
     //  销售占比
     let proportion = this.selectComponent('#table-proportion');
-    console.log('proportion',proportion)
+    // console.log('proportion',proportion)
     proportion.init(reProportionData())
     //  过去7天销售趋势（元）
     let salesTrend = this.selectComponent('#table-salesTrend');
-    console.log(salesTrend)
+    // console.log(salesTrend)
     salesTrend.init(reSalesTrendData())
     //  过去7天订单成交趋势（笔）
     let orderTrend = this.selectComponent('#table-orderTrend');

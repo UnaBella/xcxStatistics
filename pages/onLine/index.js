@@ -10,31 +10,28 @@ Page({
     moreStatus: false,
     index: 0,
     shops: [
-      { shopId: 'wwccaigou', shopName: '沈阳万象城' },
-      { shopId: 'jwgxd', shopName: '集万' }
+      { shopId: '', shopName: '全部店铺' },
     ],
     shopIds: [],
     shopNames: [],
     
     partSales: {
-      dailyAverage: '200',
+      dailyAverage: '0',
       dayDoc: {
         upOrDown: 0,
-        rate: '20%',
-        actualAmount: '1000.00',
-        supplyAmount: '750',
-        orderNum: '300',
+        rate: '0',
+        actualAmount: '0',
+        supplyAmount: '0',
+        orderNum: '0',
       },
       index: 0,
-      months: [
-        '2018.10', '2018.11', '2018.12'
-      ],
+      months: ['2018'],
       monthDoc: {
         upOrDown: 0,
-        rate: '20%',
-        actualAmount: '1000.00',
-        supplyAmount: '750',
-        orderNum: '300', 
+        rate: '0',
+        actualAmount: '0',
+        supplyAmount: '0',
+        orderNum: '0', 
       }
     },
     // 销售占比
@@ -67,12 +64,12 @@ Page({
 
   },
   onLoad:function(){
-    this.init()
+    // this.init()
     // app.getOnLineData('', this);
-    
+    app.getOnLineData('', this);
   },
   onShow:function(){
-    
+    // this.init()
   },
   init:function(){
     const partSalesData = app.globalData.onLine.partSales
@@ -133,7 +130,7 @@ Page({
    
   },
   bindMonthsPickerChange(e) {
-    console.log('picker发送选择改变，Months携带值为', e.detail.value)
+    // console.log('picker发送选择改变，Months携带值为', e.detail.value)
     
 
     const partSalesData = app.globalData.onLine.partSales
@@ -282,7 +279,7 @@ function salesTrendData(canvas, width, height, F2) {
     { money: 567, day: 6, title: '第六天' },
     { money: 201, day: 7, title: '第七天' },
   ];
-  console.log('sdasdada', getApp().globalData.onLine)
+  
   const data = getApp().globalData.onLine.salesTrendData.list
   chart.source(data, {
     day: {

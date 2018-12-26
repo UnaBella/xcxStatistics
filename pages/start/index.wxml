@@ -1,2 +1,2 @@
 <!--pages/start/index.wxml-->
-<text>欢迎使用</text>
+<view class='start'>数据加载中...</view>

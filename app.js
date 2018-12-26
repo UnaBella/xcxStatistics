@@ -26,17 +26,18 @@ App({
             // console.log('~~~',json);
             if (json.success) {
               wx.setStorageSync('token', json.data.token);
+              // setTimeout(function () {
+              //   that.getOffLineData('')
+              // }, 0)
+              // setTimeout(function () {
+              //   that.getOnLineData('')
+              // }, 0)
               setTimeout(function () {
-                that.getOffLineData('')
-              }, 0)
-              setTimeout(function () {
-                that.getOnLineData('')
-              }, 0)
-              setTimeout(function () {
+                // console.log('go')
                 wx.switchTab({
                   url: '../index/index',
                 })
-              }, 100)
+              }, 0)
              
               // console.log('g', that.globalData)
               
@@ -62,14 +63,12 @@ App({
       function (json) {
         if (json.success) {
           that.globalData.offLine = json.data;
+          console.log('offLineSuccess')
           //  console.log('xianxia', that.globalData.offLine)
           // that.getOnLineData('',tt,that)
           if(tt != undefined){
               tt.re()
-            
           }
-          
-          
         } else {
           // that.Toast('','none',2000,json.msg.code)
           console.log('here');
@@ -86,10 +85,10 @@ App({
       function (json) {
         if (json.success) {
           that.globalData.onLine = json.data;
-          console.log('xianshang', that.globalData.onLine)
+          console.log('onLineSuccess')
+          // console.log('xianshang', that.globalData.onLine)
           if (tt != undefined) {
             tt.reOnLine()
-            
           }
           
         } else {
