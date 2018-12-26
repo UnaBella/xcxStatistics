@@ -57,9 +57,9 @@ Page({
       onInit: bestSellerGoodsData
     },
     // 低销量十款商品
-    lowSalesGoodsData:{
-      onInit: lowSalesGoodsData
-    },
+    // lowSalesGoodsData:{
+    //   onInit: lowSalesGoodsData
+    // },
     // 动销率
     marketingRateData:{
       onInit: marketingRateData 
@@ -79,16 +79,24 @@ Page({
 
   onLoad:function(){
     // app.globalData.offLine
+    this.init()
+  },
+  onShow:function(){
+    // app.getOffLineData(this.data.shopIds[this.data.index]);
+  },
+  init:function(){
     const partSalesData = app.globalData.offLine.partSales
     const that = this;
     this.setData({
       shopIds: app.globalData.offLine.shops.list.map(i => { return i.shopId }),
-      shopNames: app.globalData.offLine.shops.list.map(i=>{ return i.shopName}),
+      shopNames: app.globalData.offLine.shops.list.map(i => { return i.shopName }),
 
       'partSales.dailyAverage': partSalesData.dailyAverage,
       'partSales.dayDoc': partSalesData.partSalesDay,
-      'partSales.months': partSalesData.monthGroups.list.map(i =>{ return i.month}),
+      'partSales.months': partSalesData.monthGroups.list.map(i => { return i.month }),
       'partSales.monthDoc': partSalesData.monthGroups.list[this.data.partSales.index]
+    },()=>{
+      console.log('p',partSalesData)
     })
   },
   bindShopPickerChange(e) {
@@ -97,35 +105,43 @@ Page({
       index: e.detail.value
     })
     const shopId = this.data.shopIds[e.detail.value]
-    app.getOffLineData(shopId,this.re,this)
-
-
-  
+    const that = this
+    // new Promise(function (resolve, reject) {
+      
+    // }).then(() => {
+    //   console.log('~~~@@@')
+    //   that.re()
+    // })
+    
+    app.getOffLineData(shopId, that);
   },
-  re: function (_this){
+  re: function (){
+    this.init();
     //  销售占比
-    let proportion = _this.selectComponent('#table-proportion');
-    proportion.init(reProportionData)
+    let proportion = this.selectComponent('#table-proportion');
+    console.log('proportion',proportion)
+    proportion.init(reProportionData())
     //  过去7天销售趋势（元）
-    let salesTrend = _this.selectComponent('#table-salesTrend');
-    salesTrend.init(reSalesTrendData)
+    let salesTrend = this.selectComponent('#table-salesTrend');
+    console.log(salesTrend)
+    salesTrend.init(reSalesTrendData())
     //  过去7天订单成交趋势（笔）
-    let orderTrend = _this.selectComponent('#table-orderTrend');
-    orderTrend.init(reOrderTrendData)
+    let orderTrend = this.selectComponent('#table-orderTrend');
+    orderTrend.init(reOrderTrendData())
     // 最畅销的十款商品
-    let bestSeller = _this.selectComponent('#table-bestSeller');
-    bestSeller.init(reBestSellerData)
+    let bestSeller = this.selectComponent('#table-bestSeller');
+    bestSeller.init(reBestSellerData())
     // 低销量十款商品
-    let lowSales = _this.selectComponent('#table-lowSales');
-    lowSales.init(reLowSalesData)
+    // let lowSales = this.selectComponent('#table-lowSales');
+    // lowSales.init(reLowSalesData())
     // 动销率
-    let marketing = _this.selectComponent('#table-marketing');
-    marketing.init(reMarketingData)
+    let marketing = this.selectComponent('#table-marketing');
+    marketing.init(reMarketingData())
     // 库存周转率
-    let stock = _this.selectComponent('#table-stock');
-    stock.init(reStockData)
+    let stock = this.selectComponent('#table-stock');
+    stock.init(reStockData())
     // 应收账款周转率
-    let accountsReceivable = _this.selectComponent('#table-accountsReceivable');
+    let accountsReceivable = this.selectComponent('#table-accountsReceivable');
     accountsReceivable.init(reAccountsReceivableData)
   },
   bindMonthsPickerChange(e) {
@@ -475,6 +491,7 @@ function reOrderTrendData() {
       { count: 21, day: 7, title: '第七天' },
     ];
     const data = app.globalData.offLine.orderTrendData.list
+    console.log(data)
     chart.source(data, {
       day: {
         min: 0.9,

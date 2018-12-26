@@ -73,13 +73,13 @@
   <ff-canvas id="table-orderTrend" canvas-id="scrollLine" opts="{{ orderTrendData }}"></ff-canvas>
   <view class="card-title ">最畅销的十款商品：</view>
   <ff-canvas id="table-bestSeller" canvas-id="bar" opts="{{ bestSellerGoodsData }}"></ff-canvas>
-  <view class="card-title ">低销量十款商品：</view>
-  <ff-canvas id="table-lowSales" canvas-id="bar" opts="{{ lowSalesGoodsData }}"></ff-canvas>
+  <!-- <view class="card-title ">低销量十款商品：</view>
+  <ff-canvas id="table-lowSales" canvas-id="bar" opts="{{ lowSalesGoodsData }}"></ff-canvas> -->
 
 
   <view class="card-title ">应收账款周转率：</view>
   <ff-canvas id="table-accountsReceivable" canvas-id="bar" opts="{{ accountsReceivableTRateData }}"></ff-canvas>
-  <view class="card-title ">流量来源：</view>
-  <ff-canvas id="table-trafficSource" canvas-id="bar" opts="{{ trafficSourceData }}"></ff-canvas>
+  <!-- <view class="card-title ">流量来源：</view>
+  <ff-canvas id="table-trafficSource" canvas-id="bar" opts="{{ trafficSourceData }}"></ff-canvas> -->
   <view class="bottomLine" >没错，我是底线 ;-)</view>
 </view>

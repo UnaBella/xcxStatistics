@@ -26,10 +26,19 @@ App({
             // console.log('~~~',json);
             if (json.success) {
               wx.setStorageSync('token', json.data.token);
-              that.getOffLineData('')
-              that.getOnLineData('')
-              
-              console.log('g', that.globalData)
+              setTimeout(function () {
+                that.getOffLineData('')
+              }, 0)
+              setTimeout(function () {
+                that.getOnLineData('')
+              }, 0)
+              setTimeout(function () {
+                wx.switchTab({
+                  url: '../index/index',
+                })
+              }, 100)
+             
+              // console.log('g', that.globalData)
               
             } else {
               // that.Toast('','none',2000,json.msg.code)
@@ -43,7 +52,7 @@ App({
     })
     
   },
-  getOffLineData: function (shopId,f,_this) {
+  getOffLineData: function (shopId, tt) {
     const that = this;
     this.Ajax(
       'Dashboard',
@@ -53,17 +62,21 @@ App({
       function (json) {
         if (json.success) {
           that.globalData.offLine = json.data;
-          wx.switchTab({
-            url: '../index/index',
-          })
-          f(_this);
+          //  console.log('xianxia', that.globalData.offLine)
+          // that.getOnLineData('',tt,that)
+          if(tt != undefined){
+              tt.re()
+            
+          }
+          
+          
         } else {
           // that.Toast('','none',2000,json.msg.code)
           console.log('here');
         }
       })
   },
-  getOnLineData: function (shopId) {
+  getOnLineData: function (shopId,tt) {
     const that = this;
     this.Ajax(
       'Dashboard',
@@ -73,9 +86,12 @@ App({
       function (json) {
         if (json.success) {
           that.globalData.onLine = json.data;
-          wx.switchTab({
-            url: '../index/index',
-          })
+          console.log('xianshang', that.globalData.onLine)
+          if (tt != undefined) {
+            tt.reOnLine()
+            
+          }
+          
         } else {
           // that.Toast('','none',2000,json.msg.code)
           console.log('here');
