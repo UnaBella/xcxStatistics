@@ -2,6 +2,7 @@
   "pages":[
     "pages/start/index",
     "pages/index/index",
+    "pages/register/index",
     "pages/onLine/index",
 
     "pages/test/test",

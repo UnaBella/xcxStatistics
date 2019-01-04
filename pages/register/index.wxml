@@ -1,0 +1,12 @@
+<!--pages/start/index.wxml-->
+<!-- <view class='start'>数据加载中...</view> -->
+<view class='start'>
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <!-- <view class='hot'>{{title}}</view> -->
+    <view class='nav'>
+      <text class='nav_text'>总号</text>
+      <input value='{{num}}' name='num' class='nav_input' type='number' bindinput="userNumInput" placeholder='请输入号码'></input>
+    </view>
+    <button formType="submit" disabled="{{num == ''}}"  class='button' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" >立即注册</button>
+  </form>
+</view>

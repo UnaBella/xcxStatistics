@@ -8,7 +8,7 @@ App({
     }
     else {
       //本地测试域名
-      wx.setStorageSync('domainName', "http://192.168.0.11:53695/api/analysis/Wx/")
+      wx.setStorageSync('domainName', "http://192.168.0.11:65056/api/analysis/Wx/")
     }
 
     // 登录
@@ -26,20 +26,28 @@ App({
             // console.log('~~~',json);
             if (json.success) {
               wx.setStorageSync('token', json.data.token);
-              // setTimeout(function () {
-              //   that.getOffLineData('')
-              // }, 0)
-              // setTimeout(function () {
-              //   that.getOnLineData('')
-              // }, 0)
-              setTimeout(function () {
-                // console.log('go')
+
+
+              if (!!json.data.isReg) {
+                // 跳转到授权登录页
+                console.log('登录过');
                 wx.switchTab({
                   url: '../index/index',
                 })
-              }, 0)
+              }else{
+                wx.redirectTo({
+                  url: '../register/index',
+                })
+              }
+              
+              // setTimeout(function () {
+              //   // console.log('go')
+              //   wx.switchTab({
+              //     url: '../index/index',
+              //   })
+              // }, 0)
              
-              // console.log('g', that.globalData)
+             
               
             } else {
               // that.Toast('','none',2000,json.msg.code)
@@ -187,5 +195,23 @@ App({
         // wx.hideLoading();
       }
     })
+  },
+  Toast: function (title, icon, duration, code) {
+    let content = title;
+    switch (code) {
+      case 10002:
+        content = '会员注册异常'
+        break;
+      case 10003:
+        content = '用户已绑定'
+        break;
+      default:
+        console.log(code);
+    }
+    wx.showToast({
+      title: content,
+      icon: icon,
+      duration: duration
+    });
   }
 })

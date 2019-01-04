@@ -1,5 +1,5 @@
 /* pages/start/index.wxss */
-/* page{
+page{
   width: 100%;
   height: 100%;
 }
@@ -11,93 +11,5 @@
   align-items: center;
   font-size: 30rpx;
   color: #2196f3;
-} */
-
-/* pages/registeredSalesperson/registeredSalesperson.wxss */
-page {
-  width: 750rpx;
-  height: 100%;
-  background: #eef5fc;
-  position: relative;
-}
-.start{
-  height: 100%;
-}
-form{
-  width: 100%;
-  height: 100%;
-  display:inline-block;
-}
-.hot {
-  width: 690rpx;
-  height: 86rpx;
-  padding: 0 30rpx;
-  line-height: 90rpx;
-  font-size: 28rpx;
-  color: #888888;
-}
-.nav {
-  margin-top: 300rpx;
-  /* width: 690rpx; */
-  height: 88rpx;
-  padding: 0 30rpx;
-  line-height: 88rpx;
-  background: #fff;
-  margin: 300rpx 60rpx 30rpx;
-}
-.nav_text {
- width: 160rpx;
- height: 88rpx;
- float: left;
-}
-.nav_input {
- /* width: 470rpx; */
- height: 88rpx;
- line-height: 90rpx;
 }
 
-.service {
-  display: block;
-  width: 120rpx;
-  height: 120rpx;
-  margin-left: 566rpx;
-  position: absolute;
-  bottom: 15%;
-  margin-top: 20%;
-}
-.service image {
-  width: 100%;
-  height: 100%;
-}
-.service_click {
-  position: absolute;
-  left:26rpx;
-  top:15rpx;
-}
-.button {
-
-  /* width: 300rpx; */
-  height: 94rpx;
-  font-size: 36rpx;
-  line-height: 94rpx;
-  text-align: center;
-  color: #fff;
-  border-radius:10rpx;
-  /* position: absolute;
-  left: 0;
-  right: 0; */
-  /* margin: auto; */
-  /* bottom: 500rpx; */
-   
-  background-image: linear-gradient(-45deg, #5A8ADA 0%, #91CCFC 100%);
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.20);
-
-  margin: 60rpx 60rpx 30rpx;
-  
-    
-}
-button.button[disabled]{
-background-image: linear-gradient(-45deg, #c7d4df 0%, #bbc6d8 100%);
-opacity: .4;
-color: #fff;
-}
