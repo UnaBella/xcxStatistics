@@ -125,7 +125,9 @@ button[class="more"]::after {
     text-align: center;
 }
 
-#table{
+#table,
+#line-dom
+{
   margin: 16rpx;
   width: 94%;
   height: 40%;
