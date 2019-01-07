@@ -1,5 +1,4 @@
-/* pages/index/index.wxss */
-
+/**app.wxss**/
 page{
   height: 100%;
   font-size: 32rpx;
@@ -59,10 +58,7 @@ page{
 
 .card-base{
   padding: 20rpx;
-  /* height: 170rpx; */
-}
-.card-base .center{
-  padding: 20rpx 0;
+  height: 190rpx;
 }
 .dailyAverage{
   font-size: 42rpx;
@@ -125,8 +121,15 @@ button[class="more"]::after {
     border-right: 180rpx dashed #EDEDED;
     text-align: center;
 }
-
-#table{
+#table-proportion,
+#table-salesTrend,
+#table-orderTrend,
+#table-bestSeller,
+#table-lowSales,
+#table-marketing,
+#table-stock,
+#table-accountsReceivable,
+#table-sales{
   margin: 16rpx;
   width: 94%;
   height: 40%;

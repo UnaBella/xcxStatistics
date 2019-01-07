@@ -32,11 +32,11 @@ App({
                 // 跳转到授权登录页
                 console.log('登录过');
                 wx.switchTab({
-                  url: '../index/index',
+                  url: '../trade/trade',
                 })
               }else{
                 wx.redirectTo({
-                  url: '../register/index',
+                  url: '../register/register',
                 })
               }
               

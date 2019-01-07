@@ -1,0 +1,48 @@
+<!--pages/trade/trade.wxml-->
+<view class="container">
+  
+  <view class='select'>
+    <picker bindchange="bindShopPickerChange" value="{{index}}" range="{{shopNames}}">
+      <view class="picker"> 当前店铺数据：{{shopNames[index]}} </view>
+      <view class="pickerAfter"></view>
+    </picker>
+  </view>
+  
+  
+  <view class='card'>
+    <view class='card-base'>
+      <view class='flex'>
+        <view>昨日销售额：</view>
+        <view>周同比： <text  class="{{partSales.dayDoc.upOrDown==0?'red':'green'}}">{{partSales.dayDoc.upOrDown==0?'▼':'▲'}}{{partSales.dayDoc.rate}}%</text>
+        </view>
+      </view> 
+      
+      <view class='center'>
+        <text class='dailyAverage'> {{partSales.dayDoc.actualAmount}}</text> 元
+      </view>
+     
+      <view>平台利润：{{partSales.dayDoc.supplyAmount}} 元</view>
+    </view>
+  </view>
+  <view class='card'>
+    <view class='card-base'>
+      <view class='flex'>
+        <view class='changeMonth'>
+          <picker bindchange="bindMonthsPickerChange" value="{{partSales.index}}" range="{{partSales.months}}">
+            <view class="picker"> 月销售金额：{{partSales.months[partSales.index]}} </view>
+            <view class="pickerAfter"></view>
+          </picker>
+        </view>
+        <view>环比： <text  class="{{partSales.monthDoc.upOrDown==0?'red':'green'}}">{{partSales.monthDoc.upOrDown==0?'▼':'▲'}}{{partSales.monthDoc.rate}}%</text>
+        </view>
+      </view> 
+      
+      <view class='center'>
+        <text class='dailyAverage'> {{partSales.monthDoc.actualAmount}}</text> 元
+      </view>
+     
+      <view>平台利润：{{partSales.monthDoc.supplyAmount}} 元</view>
+    </view>
+  </view>
+  <view class="bottomLine" >没错，我是底线 ;-)</view>
+</view>

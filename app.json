@@ -1,10 +1,11 @@
 {
   "pages":[
-    "pages/start/index",
+    "pages/start/start",
     "pages/index/index",
-    "pages/register/index",
-    "pages/onLine/index",
-
+    "pages/trade/trade",
+    "pages/register/register",
+    "pages/onLine/onLine",
+    "pages/offLine/offLine",
     "pages/test/test",
     "pages/logs/logs"
     
@@ -25,13 +26,25 @@
         "selectedIconPath": "static/img/se_off.png",
         "iconPath": "static/img/off.png",
         "pagePath": "pages/index/index",
+        "text": "首页"
+      },{
+        "selectedIconPath": "static/img/se_off.png",
+        "iconPath": "static/img/off.png",
+        "pagePath": "pages/offLine/offLine",
         "text": "线下店"
       },
       {
         "selectedIconPath": "static/img/se_on.png",
         "iconPath": "static/img/on.png",
-        "pagePath": "pages/onLine/index",
+        "pagePath": "pages/onLine/onLine",
         "text": "线上店"
+      },
+      
+      {
+        "selectedIconPath": "static/img/se_on.png",
+        "iconPath": "static/img/on.png",
+        "pagePath": "pages/trade/trade",
+        "text": "一般贸易"
       }
     ]
   }

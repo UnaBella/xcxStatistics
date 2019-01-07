@@ -1,5 +1,4 @@
-/* pages/index/index.wxss */
-
+/* pages/trade/trade.wxss */
 page{
   height: 100%;
   font-size: 32rpx;
@@ -20,7 +19,7 @@ page{
 .select{
   width: 80%;
   border-bottom: 1px dashed  #EDEDED;
-  margin:auto;
+  margin:0 auto;
 }
 .picker{
   display: inline-block;
@@ -59,7 +58,7 @@ page{
 
 .card-base{
   padding: 20rpx;
-  /* height: 170rpx; */
+  height: 190rpx;
 }
 .card-base .center{
   padding: 20rpx 0;

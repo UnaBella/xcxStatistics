@@ -48,7 +48,7 @@ Page({
         if (json.success) {
           app.Toast('注册成功', 'none', 1000);
           wx.switchTab({
-            url: '../index/index',
+            url: '../offLine/offLine',
           })
         } else {
           app.Toast('', 'none', 3000, json.msg.code);

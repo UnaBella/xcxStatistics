@@ -1,13 +1,34 @@
-// pages/index/index.js
+// pages/trade/trade.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    base: {
-      sales: '0',
-      platformProfit:'0',
+    index: 0,
+    shops: [
+      { shopId: '', shopName: '全部店铺' },
+    ],
+    shopIds: [],
+    shopNames: [],
+
+    partSales: {
+      dayDoc: {
+        upOrDown: 0,
+        rate: '0',
+        actualAmount: '0',
+        supplyAmount: '0',
+        orderNum: '0',
+      },
+      index: 0,
+      months: ['2018年9月'],
+      monthDoc: {
+        upOrDown: 0,
+        rate: '0',
+        actualAmount: '0',
+        supplyAmount: '0',
+        orderNum: '0'
+      }
     },
   },
 
