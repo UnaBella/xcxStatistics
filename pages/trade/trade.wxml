@@ -48,5 +48,7 @@
 
   <view class="card-title ">本年度销售趋势：</view>
   <ff-canvas  id="line-dom" canvas-id="line" opts="{{ salesTrendData }}"></ff-canvas>
+  <view class="card-title ">销售占比：</view>
+  <ff-canvas id="guage-dom"   canvas-id="guage" opts="{{ salesShareData }}"></ff-canvas>
   <view class="bottomLine" >没错，我是底线 ;-)</view>
 </view>

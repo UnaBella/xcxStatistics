@@ -4,10 +4,14 @@
     <view class='card-base'>
       截止目前平台销售额： 
       <view class='center'>
-        <text class='dailyAverage'>{{base.sales}}</text> 元
+        <text class='dailyAverage'>{{partSales.sales}}</text> 元
       </view>
-      <view>平台利润：{{base.platformProfit}} 元</view>
+      <view>平台利润：{{partSales.platformProfit}} 元</view>
     </view>
   </view>
+  <view class="card-title ">本年度销售趋势：</view>
+  <ff-canvas  id="line-dom" canvas-id="line" opts="{{ salesTrendData }}"></ff-canvas>
+  <view class="card-title ">销售占比：</view>
+  <ff-canvas id="guage-dom"   canvas-id="guage" opts="{{ salesShareData }}"></ff-canvas>
   <view class="bottomLine" >没错，我是底线 ;-)</view>
 </view>

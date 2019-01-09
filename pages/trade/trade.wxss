@@ -118,15 +118,16 @@ button[class="more"]::after {
   font-size: 24rpx;
   color:#999;
   padding: 0 20rpx 0;
-    margin: 20rpx 0;
-    line-height: 1px;
-    border-left: 180rpx dashed #EDEDED;
-    border-right: 180rpx dashed #EDEDED;
-    text-align: center;
+  margin: 20rpx 0;
+  line-height: 1px;
+  border-left: 180rpx dashed #EDEDED;
+  border-right: 180rpx dashed #EDEDED;
+  text-align: center;
 }
 
 #table,
-#line-dom
+#line-dom,
+#guage-dom
 {
   margin: 16rpx;
   width: 94%;

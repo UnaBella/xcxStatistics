@@ -106,6 +106,15 @@ App({
       })
   },
   globalData: {
+    index:{
+      proportion: {
+        proportionLegend: [],
+        proportionValues: []
+      },
+      salesTrendData: {
+        list: []
+      },
+    },
     offLine:{
       proportion:{
         proportionLegend:[],
@@ -154,6 +163,26 @@ App({
         list: []
       }
     },
+    trade:{
+      proportion: {
+        proportionLegend: [],
+        proportionValues: []
+      },
+      salesTrendData: {
+        list: []
+      },
+    },
+    dataTest:[
+      { "month": 1, "type": "销售金额", "value": 490 },
+      { "month": 2, "type": "销售金额", "value": 45 },
+      { "month": 1, "type": "平台利润", "value": 48 },
+      { "month": 2, "type": "平台利润", "value": 430 },
+    ],
+    dataTest1:[
+      { name: '上海店', percent: 0.1, a: '1' },
+      { name: '沈阳店', percent: 0.31, a: '1' },
+      { name: '其他', percent: 0.59, a: '1' }
+    ]
   },
 
 
