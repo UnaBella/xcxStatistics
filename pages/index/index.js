@@ -19,7 +19,8 @@ Page({
     },
     // 销售占比
     salesShareData: {
-      onInit: salesShare
+      lazyLoad: true
+      // onInit: salesShare
     }
   },
 
@@ -35,10 +36,11 @@ Page({
     app.Ajax(
       'Dashboard',
       'POST',
-      'GetOfflineShopData',
+      'GetHomePageData',
       { shopId: shopId },
       function (json) {
-        if (json.success) {
+        console.log('首页', json)
+        if (json.success) { 
           new Promise((resolve, reject)=>{
             // console.log('promise')
             app.globalData.index = json.data;
@@ -56,8 +58,8 @@ Page({
   init: function () {
     const partSalesData = app.globalData.index.partSales
     this.setData({
-      'partSales.sales': partSalesData.dailyAverage,
-      'partSales.platformProfit': partSalesData.dailyAverage
+      'partSales.sales': partSalesData.sales,
+      'partSales.platformProfit': partSalesData.platformProfit
     })
   },
   re: function () {
@@ -65,13 +67,13 @@ Page({
     this.init();
     // 销售趋势
     let salesTrend = this.selectComponent('#line-dom');
-    salesTrend.chart.changeData(app.globalData.index.salesTrendData.list)
+    salesTrend.chart.changeData(app.globalData.index.salesTrendData.salesTrends)
 
     // 销售占比
-    const newSalesShareData = app.globalData.index.proportion.proportionValues
-    let salesShare = this.selectComponent('#guage-dom');
-    salesShare.chart.changeData(newSalesShareData)
-
+    const newSalesShareData = app.globalData.index.salesShareData.data
+    let salesShareChartComponent = this.selectComponent('#guage-dom');
+    // salesShare.chart.changeData(newSalesShareData)
+    salesShareChartComponent.init(salesShare)
   }
 })
 
@@ -82,7 +84,7 @@ function salesTrend(canvas, width, height) {
   //   { "month": 1, "type": "平台利润", "value": 48 },
   //   { "month": 2, "type": "平台利润", "value": 43 },
   // ]
-  const data = app.globalData.index.salesTrendData.list
+  const data = app.globalData.index.salesTrendData.salesTrends
   chart = new F2.Chart({
     el: canvas,
     width,
@@ -90,22 +92,22 @@ function salesTrend(canvas, width, height) {
   });
 
   chart.source(data, {
-    year: {
+    month: {
       range: [0, 1],
       ticks: [1, 2]
     },
-    value: {
-      tickCount: 10,
-      formatter(val) {
-        return val.toFixed(1);
-      }
-    }
+    // value: {
+    //   tickCount: 10,
+    //   formatter(val) {
+    //     // return val.toFixed(1);
+    //   }
+    // }
   });
 
   chart.tooltip({
     custom: true, // 自定义 tooltip 内容框
     onChange(obj) {
-      const legend = chart.get('legendController').legends.top[0];
+      const legend = chart.get('legendController').legends.bottom[0];
       const tooltipItems = obj.items;
       const legendItems = legend.items;
       const map = {};
@@ -121,7 +123,7 @@ function salesTrend(canvas, width, height) {
       legend.setItems(Object.values(map));
     },
     onHide() {
-      const legend = chart.get('legendController').legends.top[0];
+      const legend = chart.get('legendController').legends.bottom[0];
       legend.setItems(chart.getLegendItems().country);
     }
   });
@@ -144,8 +146,10 @@ function salesTrend(canvas, width, height) {
   // });
 
   chart.line().position('month*value').color('type', val => {
-    if (val === '平台利润') {
+    if (val === '线下店') {
       return '#ff0000';
+    } else if (val === '一般贸易'){
+      return '#9bbb59';
     }
   });
   chart.render();
@@ -166,10 +170,10 @@ function salesShare(canvas, width, height, F2) {
 
 
   const map = {}
-  const data = app.globalData.index.proportion.proportionValues
+  const data = app.globalData.index.salesShareData.data
 
   data.map(i => {
-    map[i.shopName] = i.percent * 100 + '%'
+    map[i.name] = (i.percent * 100).toFixed(2) + '%'
   })
 
   chart = new F2.Chart({
@@ -198,7 +202,7 @@ function salesShare(canvas, width, height, F2) {
   chart.axis(false);
   chart.interval()
     .position('a*percent')
-    .color('shopName', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864', '#8543E0'])
+    .color('name', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864', '#8543E0'])
     .adjust('stack')
     .style({
       lineWidth: 1,

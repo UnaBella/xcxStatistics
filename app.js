@@ -107,12 +107,13 @@ App({
   },
   globalData: {
     index:{
-      proportion: {
-        proportionLegend: [],
-        proportionValues: []
+      salesShareData: {
+        map: [],
+        data: []
       },
       salesTrendData: {
-        list: []
+        salesTrends: [],
+        status:1
       },
     },
     offLine:{
