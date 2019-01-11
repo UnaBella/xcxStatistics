@@ -170,7 +170,7 @@ App({
         proportionValues: []
       },
       salesTrendData: {
-        list: []
+        salesTrends: []
       },
     },
     dataTest:[
