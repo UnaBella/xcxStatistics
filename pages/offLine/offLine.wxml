@@ -62,7 +62,7 @@
     <view class='card-base'>
       昨日动销比： 
       <view class='center'>
-        <text class='dailyAverage'>{{partSales.marketingRate}}</text> 元
+        <text class='dailyAverage'>{{partSales.marketingRate}}</text>
       </view>
     </view>
   </view>

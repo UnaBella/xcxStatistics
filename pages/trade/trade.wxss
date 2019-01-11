@@ -126,10 +126,10 @@ button[class="more"]::after {
 }
 
 #table,
-#line-dom,
+#line4-dom,
 #guage-dom
 {
-  margin: 16rpx;
+  margin: 16rpx 16rpx 36rpx;
   width: 94%;
   height: 40%;
   /* border: 1px solid red; */

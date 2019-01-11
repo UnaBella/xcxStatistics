@@ -121,7 +121,7 @@ Page({
     // console.log('re',app.globalData.trade.proportion)
     this.init();
     // 销售趋势
-    let salesTrend = this.selectComponent('#line-dom');
+    let salesTrend = this.selectComponent('#line4-dom');
     salesTrend.chart.changeData(app.globalData.trade.salesTrendData.salesTrends)
 
   }
