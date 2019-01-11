@@ -14,7 +14,7 @@
 		"uglifyFileName": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.3",
+	"libVersion": "2.5.0",
 	"appid": "wxe63381518057950d",
 	"projectname": "xcxStatistics",
 	"debugOptions": {
