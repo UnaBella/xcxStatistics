@@ -57,6 +57,15 @@
       <view>订单数：{{partSales.monthDoc.orderNum}} 笔</view>
     </view>
   </view>
+
+  <view class='card'>
+    <view class='card-base'>
+      昨日动销比： 
+      <view class='center'>
+        <text class='dailyAverage'>{{partSales.marketingRate}}</text> 元
+      </view>
+    </view>
+  </view>
   <!-- <view class="posA {{moreStatus?'none':''}}">
     <button class='more' bindtap='checkMore'>查看更多</button>
   </view> -->
@@ -76,8 +85,8 @@
   <!-- <view class="card-title ">低销量十款商品：</view>
   <ff-canvas id="table-lowSales" canvas-id="bar" opts="{{ lowSalesGoodsData }}"></ff-canvas> -->
 
-  <view class="card-title ">动销率：</view>
-  <ff-canvas id="table-marketing" canvas-id="bar" opts="{{ marketingRateData }}"></ff-canvas>
+  <!-- <view class="card-title ">动销率：</view>
+  <ff-canvas id="table-marketing" canvas-id="bar" opts="{{ marketingRateData }}"></ff-canvas> -->
   <view class="card-title ">库存周转率：</view>
   <ff-canvas id="table-stock" canvas-id="bar" opts="{{ stockTRateData }}"></ff-canvas>
   <view class="card-title ">应收账款周转率：</view>

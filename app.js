@@ -32,7 +32,7 @@ App({
                 // 跳转到授权登录页
                 console.log('登录过');
                 wx.switchTab({
-                  url: '../trade/trade',
+                  url: '../index/index',
                 })
               }else{
                 wx.redirectTo({
@@ -165,12 +165,9 @@ App({
       }
     },
     trade:{
-      proportion: {
-        proportionLegend: [],
-        proportionValues: []
-      },
       salesTrendData: {
-        salesTrends: []
+        salesTrends: [],
+        status:''
       },
     },
     dataTest:[

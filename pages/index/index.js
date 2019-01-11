@@ -15,7 +15,9 @@ Page({
     },
     // 销售趋势
     salesTrendData: {
-      onInit: salesTrend
+      status:'',
+      lazyLoad: true
+      // onInit: salesTrend
     },
     // 销售占比
     salesShareData: {
@@ -39,14 +41,18 @@ Page({
       'GetHomePageData',
       { shopId: shopId },
       function (json) {
-        console.log('首页', json)
+        // console.log('首页', json)
         if (json.success) { 
           new Promise((resolve, reject)=>{
             // console.log('promise')
             app.globalData.index = json.data;
+            that.setData({
+              'salesTrendData.status': json.data.salesTrendData.status
+            })
             resolve()
+            // console.log('chengg ')
           }).then(()=>{
-            // console.log('thennnn')
+            // console.log('thennnn', app.globalData.index)
             that.re();
           })
         } else {
@@ -63,11 +69,11 @@ Page({
     })
   },
   re: function () {
-    // console.log('re',app.globalData.trade.proportion)
+    // console.log('re',app.globalData.index)
     this.init();
     // 销售趋势
-    let salesTrend = this.selectComponent('#line-dom');
-    salesTrend.chart.changeData(app.globalData.index.salesTrendData.salesTrends)
+    let salesTrendChartComponent = this.selectComponent('#line-dom');
+    salesTrendChartComponent.init(salesTrend)
 
     // 销售占比
     const newSalesShareData = app.globalData.index.salesShareData.data
@@ -76,8 +82,8 @@ Page({
     salesShareChartComponent.init(salesShare)
   }
 })
-
-function salesTrend(canvas, width, height) {
+// 销售趋势
+function salesTrend(canvas, width, height, F2) {
   // const data=[
   //   { "month": 1, "type": "销售金额", "value": 490 },
   //   { "month": 2, "type": "销售金额", "value": 450 },
@@ -85,7 +91,8 @@ function salesTrend(canvas, width, height) {
   //   { "month": 2, "type": "平台利润", "value": 43 },
   // ]
   const data = app.globalData.index.salesTrendData.salesTrends
-  chart = new F2.Chart({
+  // console.log('sss',data)
+  const chart = new F2.Chart({
     el: canvas,
     width,
     height
@@ -94,20 +101,24 @@ function salesTrend(canvas, width, height) {
   chart.source(data, {
     month: {
       range: [0, 1],
-      ticks: [1, 2]
+      ticks: [1, 2,3,4,5,6,7,8,9,10,11,12]
     },
-    // value: {
-    //   tickCount: 10,
-    //   formatter(val) {
-    //     // return val.toFixed(1);
-    //   }
-    // }
+    value: {
+      tickCount: 10,
+      formatter(val) {
+        return val;
+      }
+    }
   });
-
+  chart.legend({
+    position: 'top'
+  });
   chart.tooltip({
     custom: true, // 自定义 tooltip 内容框
     onChange(obj) {
-      const legend = chart.get('legendController').legends.bottom[0];
+      // console.log('sssss', chart.get('legendController').legends)
+      const legend = chart.get('legendController').legends.top[0];
+      
       const tooltipItems = obj.items;
       const legendItems = legend.items;
       const map = {};
@@ -115,15 +126,16 @@ function salesTrend(canvas, width, height) {
         map[item.name] = Object.assign({}, item);
       });
       tooltipItems.map(item => {
+        // console.log('sss',item)
         const { name, value } = item;
         if (map[name]) {
-          map[name].value = value;
+          map[name].value = value + '元';
         }
       });
       legend.setItems(Object.values(map));
     },
     onHide() {
-      const legend = chart.get('legendController').legends.bottom[0];
+      const legend = chart.get('legendController').legends.top[0];
       legend.setItems(chart.getLegendItems().country);
     }
   });
@@ -155,7 +167,7 @@ function salesTrend(canvas, width, height) {
   chart.render();
   return chart;
 }
-
+// 销售占比
 function salesShare(canvas, width, height, F2) {
   // const map = {
   //   '上海店': '40%',

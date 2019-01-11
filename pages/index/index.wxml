@@ -9,7 +9,7 @@
       <view>平台利润：{{partSales.platformProfit}} 元</view>
     </view>
   </view>
-  <view class="card-title ">本年度销售趋势：</view>
+  <view class="card-title ">{{salesTrendData.status}}年度销售趋势：</view>
   <ff-canvas  id="line-dom" canvas-id="line" opts="{{ salesTrendData }}"></ff-canvas>
   <view class="card-title ">销售占比：</view>
   <ff-canvas id="guage-dom"   canvas-id="guage" opts="{{ salesShareData }}"></ff-canvas>

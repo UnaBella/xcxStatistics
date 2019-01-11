@@ -17,6 +17,7 @@ Page({
 
     partSales:{
       dailyAverage:'0',
+      marketingRate:'0',
       dayDoc:{
         upOrDown:0,
         rate:'0',
@@ -36,36 +37,44 @@ Page({
     },
     // 销售占比
     proportionData:{
-      onInit: proportionData
+      lazyLoad: true,
+      // onInit: proportionData
     },
     // 过去7天销售趋势
     salesTrendData:{
-      onInit: salesTrendData
+      lazyLoad: true,
+      // onInit: salesTrendData
     },
     // 过去7天订单成交趋势
     orderTrendData: {
-      onInit: orderTrendData
+      lazyLoad: true,
+      // onInit: orderTrendData
     },
 
     // 最畅销的十款商品
     bestSellerGoodsData:{
-      onInit: bestSellerGoodsData
+      lazyLoad: true,
+      // onInit: bestSellerGoodsData
     },
     // 低销量十款商品
     // lowSalesGoodsData:{
+    //   lazyLoad: true,
     //   onInit: lowSalesGoodsData
     // },
     // 动销率
-    marketingRateData:{
-      onInit: marketingRateData 
-    },
+    // marketingRateData:{
+    //   lazyLoad: true,
+    //   onInit: marketingRateData 
+    // },
     // 库存周转率
     stockTRateData:{
-      onInit: stockTRateData 
+      lazyLoad: true,
+      // onInit: stockTRateData 
     },
     // 应收账款周转率
     accountsReceivableTRateData:{
-      onInit: accountsReceivableTRateData 
+      lazyLoad: true,
+      // onInit: accountsReceivableTRateData 
     }
     
   },
@@ -88,6 +97,7 @@ Page({
       shopNames: app.globalData.offLine.shops.list.map(i => { return i.shopName }),
 
       'partSales.dailyAverage': partSalesData.dailyAverage,
+      'partSales.marketingRate': partSalesData.marketingRate,
       'partSales.dayDoc': partSalesData.partSalesDay,
       'partSales.months': partSalesData.monthGroups.list.map(i => { return i.month }),
       'partSales.monthDoc': partSalesData.monthGroups.list[this.data.partSales.index]
@@ -96,7 +106,8 @@ Page({
   bindShopPickerChange(e) {
     // console.log('picker发送选择改变，Shop携带值为', e.detail.value)
     this.setData({
-      index: e.detail.value
+      index: e.detail.value,
+      'partSales.index': 0,
     })
     const shopId = this.data.shopIds[e.detail.value]
     const that = this
@@ -114,29 +125,29 @@ Page({
     //  销售占比
     let proportion = this.selectComponent('#table-proportion');
     // console.log('proportion',proportion)
-    proportion.init(reProportionData())
+    proportion.init(proportionData)
     //  过去7天销售趋势（元）
     let salesTrend = this.selectComponent('#table-salesTrend');
     // console.log(salesTrend)
-    salesTrend.init(reSalesTrendData())
+    salesTrend.init(orderTrendData)
     //  过去7天订单成交趋势（笔）
     let orderTrend = this.selectComponent('#table-orderTrend');
-    orderTrend.init(reOrderTrendData())
+    orderTrend.init(orderTrendData)
     // 最畅销的十款商品
     let bestSeller = this.selectComponent('#table-bestSeller');
-    bestSeller.init(reBestSellerData())
+    bestSeller.init(bestSellerGoodsData)
     // 低销量十款商品
     // let lowSales = this.selectComponent('#table-lowSales');
-    // lowSales.init(reLowSalesData())
+    // lowSales.init(lowSalesGoodsData)
     // 动销率
-    let marketing = this.selectComponent('#table-marketing');
-    marketing.init(reMarketingData())
+    // let marketing = this.selectComponent('#table-marketing');
+    // marketing.init(marketingRateData)
     // 库存周转率
     let stock = this.selectComponent('#table-stock');
-    stock.init(reStockData())
+    stock.init(stockTRateData)
     // 应收账款周转率
     let accountsReceivable = this.selectComponent('#table-accountsReceivable');
-    accountsReceivable.init(reAccountsReceivableData)
+    accountsReceivable.init(accountsReceivableTRateData)
   },
   bindMonthsPickerChange(e) {
     // console.log('picker发送选择改变，Months携带值为', e.detail.value)
@@ -147,11 +158,7 @@ Page({
     })
   },
 
-  checkMore:function(){
-    this.setData({
-      moreStatus:true
-    })
-  }
+ 
 });
 // 销售占比
 function proportionData(canvas, width, height, F2) { // 使用 F2 绘制图表
@@ -213,63 +220,10 @@ function proportionData(canvas, width, height, F2) { // 使用 F2 绘制图表
   chart.render();
   return chart;
 }
-function reProportionData (){
-  (canvas, width, height) => {
-    const data1 = [
-      { name: '上海店', percent: 0.1, a: '1' },
-      { name: '沈阳店', percent: 0.31, a: '1' },
-      { name: '其他', percent: 0.59, a: '1' }
-    ]
-    const data = getApp().globalData.offLine.proportion.proportionValues
-    // let data = doc
-    chart = new F2.Chart({
-      el: canvas,
-      width,
-      height
-    });
-    chart.source(data, {
-      percent: {
-        formatter(val) {
-          return val * 100 + '%';
-        }
-      }
-    });
-    // chart.legend({
-    //   position: 'right',
-    //   itemFormatter(val) {
-    //     return val + '  ' + map[val];
-    //   }
-    // });
-    chart.tooltip(false);
-    chart.coord('polar', {
-      transposed: true,
-      radius: 0.85
-    });
-    chart.axis(false);
-    chart.interval()
-      .position('a*percent')
-      .color('shopName', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864', '#8543E0'])
-      .adjust('stack')
-      .style({
-        lineWidth: 1,
-        stroke: '#fff',
-        lineJoin: 'round',
-        lineCap: 'round'
-      })
-      .animate({
-        appear: {
-          duration: 1200,
-          easing: 'bounceOut'
-        }
-      });
 
-    chart.render();
-    return chart;
-  }
-}
 // 过去7天销售趋势
 function salesTrendData(canvas, width, height, F2) {
-  chart = new F2.Chart({
+  const chart = new F2.Chart({
     el: canvas,
     width,
     height,
@@ -337,73 +291,10 @@ function salesTrendData(canvas, width, height, F2) {
   chart.render();
   return chart;
 }
-function reSalesTrendData() {
-  (canvas, width, height) => {
-    chart = new F2.Chart({
-      el: canvas,
-      width,
-      height,
-      animate: false
-    });
-   
-    const data = app.globalData.offLine.salesTrendData.list
-    // console.log(data)
-    chart.source(data, {
-      day: {
-        min: 0.9,
-        max: 7.1
-      }
-    });
-    chart.tooltip({
-      showCrosshairs: true,
-      showItemMarker: false,
-      background: {
-        radius: 2,
-        fill: '#1890FF',
-        padding: [3, 5]
-      },
-      nameStyle: {
-        fill: '#fff'
-      },
-      onShow(ev) {
-        const items = ev.items;
-        items[0].value = items[0].value + ' 元 ';
-        items[0].name = items[0].title;
-      }
-    });
-    chart.line().position('title*money');
-    chart.point()
-      .position('title*money')
-      .style({
-        lineWidth: 1,
-        stroke: '#fff'
-      });
 
-    chart.interaction('pan');
-    // 定义进度条
-    chart.scrollBar({
-      mode: 'x',
-      xStyle: {
-        offsetY: -5
-      }
-    });
-
-    // 绘制 tag
-    chart.guide().tag({
-      position: [1969, 1344],
-      withPoint: false,
-      content: '1,344',
-      limitInPlot: true,
-      offsetX: 5,
-      direct: 'cr'
-    });
-    chart.render();
-    return chart;
-  }
-}
 // 过去7天订单成交趋势
 function orderTrendData(canvas, width, height, F2) {
-  chart = new F2.Chart({
+  const chart = new F2.Chart({
     el: canvas,
     width,
     height,
@@ -474,78 +365,7 @@ function orderTrendData(canvas, width, height, F2) {
   chart.render();
   return chart;
 }
-function reOrderTrendData() {
-  (canvas, width, height) => {
-    chart = new F2.Chart({
-      el: canvas,
-      width,
-      height,
-      animate: false
-    });
-    const data1 = [
-      { count: 500, day: 1, title: '第一天' },
-      { count: 184, day: 2, title: '第二天' },
-      { count: 117, day: 3, title: '第三天' },
-      { count: 78, day: 4, title: '第四天' },
-      { count: 70, day: 5, title: '第五天' },
-      { count: 67, day: 6, title: '第六天' },
-      { count: 21, day: 7, title: '第七天' },
-    ];
-    const data = app.globalData.offLine.orderTrendData.list
-    console.log(data)
-    chart.source(data, {
-      day: {
-        min: 0.9,
-        max: 7.1
-      }
-    });
-    chart.tooltip({
-      showCrosshairs: true,
-      showItemMarker: false,
-      background: {
-        radius: 2,
-        fill: '#1890FF',
-        padding: [3, 5]
-      },
-      nameStyle: {
-        fill: '#fff'
-      },
-      onShow(ev) {
-        const items = ev.items;
-        items[0].value = items[0].value + ' 笔 ';
-        items[0].name = items[0].title;
-      }
-    });
-    chart.line().position('title*count');
-    chart.point()
-      .position('title*count')
-      .style({
-        lineWidth: 1,
-        stroke: '#fff'
-      });
 
-    chart.interaction('pan');
-    // 定义进度条
-    chart.scrollBar({
-      mode: 'x',
-      xStyle: {
-        offsetY: -5
-      }
-    });
-
-    // 绘制 tag
-    chart.guide().tag({
-      position: [1969, 1344],
-      withPoint: false,
-      content: '1,344',
-      limitInPlot: true,
-      offsetX: 5,
-      direct: 'cr'
-    });
-    chart.render();
-    return chart;
-  }
-}
 // 最畅销的十款商品
 function bestSellerGoodsData(canvas, width, height, F2) {
   chart = new F2.Chart({
@@ -618,79 +438,7 @@ function bestSellerGoodsData(canvas, width, height, F2) {
   
   return chart;
 }
-function reBestSellerData() {
-  (canvas, width, height) => {
-    chart = new F2.Chart({
-      el: canvas,
-      width,
-      height
-    });
 
-    const Global = F2.Global;
-    const data1 = [
-      { brand: '片仔癀', count: 1070 },
-      { brand: '美年达', count: 1080 },
-      { brand: '大宝', count: 1314 },
-      { brand: '罗拉', count: 1470 },
-      { brand: '7°', count: 10497 },
-      { brand: 'CPB', count: 10970 },
-      { brand: '兰芝', count: 10970 },
-      { brand: '菲洛嘉', count: 18203 },
-      { brand: '兰蔻', count: 23489 },
-      { brand: '后', count: 27034 },
-    ];
-    const data = app.globalData.offLine.bestSellerGoodsData.list
-    // 绘制文本
-    data.map(function (obj) {
-      chart.guide().text({
-        position: [obj.brand, obj.count],
-        content: obj.count,
-        style: {
-          width: '100px',
-          textAlign: 'start',
-          size: '12px'
-        },
-        offsetX: 1
-      });
-    });
-    chart.source(data, {
-      population: {
-        tickCount: 5
-      }
-    });
-    chart.coord({
-      transposed: true
-    });
-    chart.axis('brand', {
-      line: Global._defaultAxis.line,
-      grid: null
-    });
-    chart.axis('count', {
-      line: null,
-      grid: Global._defaultAxis.grid,
-      label: function label(text, index, total) {
-        var textCfg = {};
-        if (index === 0) {
-          textCfg.textAlign = 'left';
-        } else if (index === total - 1) {
-          textCfg.textAlign = 'right';
-        }
-        return textCfg;
-      }
-    });
-    chart.tooltip({
-      onShow(ev) {
-        const items = ev.items;
-        items[0].value = items[0].value;
-        items[0].name = items[0].title;
-      }
-    });
-    chart.interval().position('brand*count');
-    chart.render();
-
-    return chart;
-  }
-}
 // 低销量十款商品
 function lowSalesGoodsData(canvas, width, height, F2){
   chart = new F2.Chart({
@@ -762,78 +510,7 @@ function lowSalesGoodsData(canvas, width, height, F2){
 
   return chart;
 }
-function reLowSalesData() {
-  (canvas, width, height) => {
-    chart = new F2.Chart({
-      el: canvas,
-      width,
-      height
-    });
 
-    const Global = F2.Global;
-    const data1 = [
-      { brand: '片仔癀', count: 17 },
-      { brand: '美年达', count: 108 },
-      { brand: '大宝', count: 131 },
-      { brand: '罗拉', count: 147 },
-      { brand: '7°', count: 1049 },
-      { brand: 'CPB', count: 1097 },
-      { brand: '兰芝', count: 1097 },
-      { brand: '菲洛嘉', count: 1820 },
-      { brand: '兰蔻', count: 2348 },
-      { brand: '后', count: 2703 },
-    ];
-    const data = app.globalData.offLine.lowSellerGoodsData.list
-    // 绘制文本
-    data.map(function (obj) {
-      chart.guide().text({
-        position: [obj.brand, obj.count],
-        content: obj.count,
-        style: {
-          textAlign: 'start',
-          size: '12px'
-        },
-        offsetX: 1
-      });
-    });
-    chart.source(data, {
-      population: {
-        tickCount: 5
-      }
-    });
-    chart.coord({
-      transposed: true
-    });
-    chart.axis('brand', {
-      line: Global._defaultAxis.line,
-      grid: null
-    });
-    chart.axis('count', {
-      line: null,
-      grid: Global._defaultAxis.grid,
-      label: function label(text, index, total) {
-        var textCfg = {};
-        if (index === 0) {
-          textCfg.textAlign = 'left';
-        } else if (index === total - 1) {
-          textCfg.textAlign = 'right';
-        }
-        return textCfg;
-      }
-    });
-    chart.tooltip({
-      onShow(ev) {
-        const items = ev.items;
-        items[0].value = items[0].value;
-        items[0].name = items[0].title;
-      }
-    });
-    chart.interval().position('brand*count');
-    chart.render();
-
-    return chart;
-  }
-}
 // 动销率
 function marketingRateData(canvas, width, height, F2) {
   chart = new F2.Chart({
@@ -905,81 +582,10 @@ function marketingRateData(canvas, width, height, F2) {
   chart.render();
   return chart;
 }
-function reMarketingData() {
-  (canvas, width, height) => {
-    chart = new F2.Chart({
-      el: canvas,
-      width,
-      height,
-      animate: false
-    });
-    const data1 = [
-      { rate: 0.66, title: '周一' },
-      { rate: 0.60, title: '周二' },
-      { rate: 0.56, title: '周三' },
-      { rate: 0.16, title: '周四' },
-      { rate: 0.36, title: '周五' },
-      { rate: 0.76, title: '周六' },
-      { rate: 0.26, title: '周日' },
-    ];
-    const data = app.globalData.offLine.marketingRateData.list
-    chart.source(data, {
-      rate: {
-        formatter(val) {
-          return val  + '%';
-        }
-      }
-    });
-    chart.tooltip({
-      showCrosshairs: true,
-      showItemMarker: false,
-      background: {
-        radius: 2,
-        fill: '#1890FF',
-        padding: [3, 5]
-      },
-      nameStyle: {
-        fill: '#fff'
-      },
-      onShow(ev) {
-        const items = ev.items;
-        items[0].value = items[0].value;
-        items[0].name = items[0].title;
-      }
-    });
-    chart.line().position('title*rate');
-    chart.point()
-      .position('title*rate')
-      .style({
-        lineWidth: 1,
-        stroke: '#fff'
-      });
 
-    chart.interaction('pan');
-    // 定义进度条
-    chart.scrollBar({
-      mode: 'x',
-      xStyle: {
-        offsetY: -5
-      }
-    });
-
-    // 绘制 tag
-    chart.guide().tag({
-      position: [1969, 1344],
-      withPoint: false,
-      content: '1,344',
-      limitInPlot: true,
-      offsetX: 5,
-      direct: 'cr'
-    });
-    chart.render();
-    return chart;
-  }
-}
 // 库存周转率
 function stockTRateData(canvas, width, height, F2) {
-  chart = new F2.Chart({
+  const chart = new F2.Chart({
     el: canvas,
     width,
     height,
@@ -1057,90 +663,10 @@ function stockTRateData(canvas, width, height, F2) {
   chart.render();
   return chart;
 }
-function reStockData() {
-  (canvas, width, height) => {
-    chart = new F2.Chart({
-      el: canvas,
-      width,
-      height,
-      animate: false
-    });
-    const data1 = [
-      { rate: 0.66, title: 1 },
-      { rate: 0.60, title: 2 },
-      { rate: 0.56, title: 3 },
-      { rate: 0.16, title: 4 },
-      { rate: 0.36, title: 5 },
-      { rate: 0.76, title: 6 },
-      { rate: 0.26, title: 7 },
-      { rate: 0.36, title: 8 },
-      { rate: 0.56, title: 9 },
-      { rate: 0.43, title: 10 },
-      { rate: 0.76, title: 11 },
-      { rate: 0.26, title: 12 },
-    ];
-    const data = app.globalData.offLine.stockTRateData.list
-    chart.source(data, {
-      title: {
-        min: 0,
-        max: 12,
-      },
-      rate: {
-        formatter(val) {
-          return val  + '%';
-        }
-      }
-    });
-    chart.tooltip({
-      showCrosshairs: true,
-      showItemMarker: false,
-      background: {
-        radius: 2,
-        fill: '#1890FF',
-        padding: [3, 5]
-      },
-      nameStyle: {
-        fill: '#fff'
-      },
-      onShow(ev) {
-        const items = ev.items;
-        items[0].value = items[0].value;
-        items[0].name = items[0].title;
-      }
-    });
-    chart.line().position('title*rate');
-    chart.point()
-      .position('title*rate')
-      .style({
-        lineWidth: 1,
-        stroke: '#fff'
-      });
 
-    chart.interaction('pan');
-    // 定义进度条
-    chart.scrollBar({
-      mode: 'x',
-      xStyle: {
-        offsetY: -5
-      }
-    });
-
-    // 绘制 tag
-    chart.guide().tag({
-      position: [1969, 1344],
-      withPoint: false,
-      content: '1,344',
-      limitInPlot: true,
-      offsetX: 5,
-      direct: 'cr'
-    });
-    chart.render();
-    return chart;
-  }
-}
 // 应收账款周转率
 function accountsReceivableTRateData(canvas, width, height, F2) {
-  chart = new F2.Chart({
+  const chart = new F2.Chart({
     el: canvas,
     width,
     height,
@@ -1219,87 +745,4 @@ function accountsReceivableTRateData(canvas, width, height, F2) {
   });
   chart.render();
   return chart;
-}
-function reAccountsReceivableData() {
-  (canvas, width, height) => {
-    chart = new F2.Chart({
-      el: canvas,
-      width,
-      height,
-      animate: false
-    });
-    const data1 = [
-      { rate: 0.66, title: 1 },
-      { rate: 0.60, title: 2 },
-      { rate: 0.56, title: 3 },
-      { rate: 0.16, title: 4 },
-      { rate: 0.36, title: 5 },
-      { rate: 0.76, title: 6 },
-      { rate: 0.26, title: 7 },
-      { rate: 0.36, title: 8 },
-      { rate: 0.56, title: 9 },
-      { rate: 0.43, title: 10 },
-      { rate: 0.76, title: 11 },
-      { rate: 0.26, title: 12 },
-    ];
-    const data = app.globalData.offLine.accountsReceivableTRateData.list
-    chart.source(data, {
-      title: {
-        min: 0.9,
-        max: 12.1,
-      },
-      rate: {
-        formatter(val) {
-          // return val * 100 + '%';
-          return val  + '%';
-
-        }
-      }
-    });
-    chart.tooltip({
-      showCrosshairs: true,
-      showItemMarker: false,
-      background: {
-        radius: 2,
-        fill: '#1890FF',
-        padding: [3, 5]
-      },
-      nameStyle: {
-        fill: '#fff'
-      },
-      onShow(ev) {
-        const items = ev.items;
-        items[0].value = items[0].value;
-        items[0].name = items[0].title + '月';
-      }
-    });
-    chart.line().position('title*rate');
-    chart.point()
-      .position('title*rate')
-      .style({
-        lineWidth: 1,
-        stroke: '#fff'
-      });
-
-    chart.interaction('pan');
-    // 定义进度条
-    chart.scrollBar({
-      mode: 'x',
-      xStyle: {
-        offsetY: -5
-      }
-    });
-
-    // 绘制 tag
-    chart.guide().tag({
-      position: [1969, 1344],
-      withPoint: false,
-      content: '1,344',
-      limitInPlot: true,
-      offsetX: 5,
-      direct: 'cr'
-    });
-    chart.render();
-    return chart;
-  }
 }
