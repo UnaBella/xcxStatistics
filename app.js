@@ -11,6 +11,9 @@ App({
       wx.setStorageSync('domainName', "http://192.168.0.11:65056/api/analysis/Wx/")
     }
 
+
+
+// test
     // 登录
     wx.login({
       success: res => {
